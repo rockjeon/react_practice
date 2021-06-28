@@ -1,10 +1,20 @@
 import React from 'react'
-function Data({ data, onRemove }) {
+function Data({ data, onRemove, onToggle }) {
     return (
         <>
             <div className="DataList">
                 <ul>
-                    <li>{data.username}</li>
+                    <li
+                        style={{
+                            cursor: 'pointer',
+                            color: data.active ? 'green' : 'black',
+                        }}
+                        onClick={() => {
+                            onToggle(data.id)
+                        }}
+                    >
+                        {data.username}
+                    </li>
                     <button onClick={() => onRemove(data.id)}>삭제</button>
                 </ul>
             </div>
@@ -12,7 +22,7 @@ function Data({ data, onRemove }) {
     )
 }
 
-function DataList({ datas, onRemove }) {
+function DataList({ datas, onRemove, onToggle }) {
     return (
         <>
             <div>
@@ -20,7 +30,12 @@ function DataList({ datas, onRemove }) {
             </div>
             <div>
                 {datas.map((data) => (
-                    <Data data={data} key={data.id} onRemove={onRemove} />
+                    <Data
+                        data={data}
+                        key={data.id}
+                        onRemove={onRemove}
+                        onToggle={onToggle}
+                    />
                 ))}
             </div>
         </>

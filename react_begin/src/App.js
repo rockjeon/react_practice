@@ -53,6 +53,13 @@ function App() {
     const onRemove = (id) => {
         setDatas(datas.filter((data) => data.id !== id))
     }
+    const onToggle = (id) => {
+        setDatas(
+            datas.map((data) =>
+                data.id === id ? { ...data, active: !data.active } : data
+            )
+        )
+    }
     return (
         <>
             <Hello name="rockjeon" />
@@ -64,7 +71,7 @@ function App() {
                 onChange={onChange}
                 onCreate={onCreate}
             />
-            <DataList datas={datas} onRemove={onRemove} />
+            <DataList datas={datas} onRemove={onRemove} onToggle={onToggle} />
         </>
     )
 }
